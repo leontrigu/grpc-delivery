@@ -4,7 +4,6 @@ import com.perficient.orderapp.domain.mother.ProductItemMother;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,17 +15,15 @@ public class CartTest {
             "should match the price x quantity of products")
     void add_product_total_price_success() {
         // GIVEN
-        var product1 = ProductItemMother.product1
-                .price(BigDecimal.valueOf(4.5)).build();
-        var product2 = ProductItemMother.product2
-                .price(BigDecimal.valueOf(3.6)).build();
+        var product1 = ProductItemMother.product1.build();
+        var product2 = ProductItemMother.product2.build();
         var cart = new Cart();
         // WHEN
-        cart.addProduct(product1);
-        cart.addProduct(product2);
+        cart.addProduct(product1, 1);
+        cart.addProduct(product2, 1);
         var total = cart.getTotalPrice();
         // THEN
-        assertEquals(BigDecimal.valueOf(8.1), total);
+        assertEquals(ProductItemMother.TOTAL_PRICE, total);
     }
 
     @Test
@@ -34,16 +31,14 @@ public class CartTest {
             "should add products success")
     void add_product_empty_cart_success() {
         // GIVEN
-        var product1 = ProductItemMother.product1
-                .price(BigDecimal.valueOf(4.5)).build();
-        var product2 = ProductItemMother.product2
-                .price(BigDecimal.valueOf(3.6)).build();
+        var product1 = ProductItemMother.product1.build();
+        var product2 = ProductItemMother.product2.build();
         var cart = new Cart(UUID.randomUUID(), null, null);
         // WHEN
-        cart.addProduct(product1);
-        cart.addProduct(product2);
+        cart.addProduct(product1, 1);
+        cart.addProduct(product2, 1);
         var total = cart.getTotalPrice();
         // THEN
-        assertEquals(BigDecimal.valueOf(8.1), total);
+        assertEquals(ProductItemMother.TOTAL_PRICE, total);
     }
 }

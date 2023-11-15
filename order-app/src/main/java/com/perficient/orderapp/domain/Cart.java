@@ -28,14 +28,19 @@ public class Cart {
         return totalPrice;
     }
 
-    public void addProduct(ProductItem product) {
+    public void addProduct(ProductItem product, int quantity) {
         initCart();
         if (products.containsKey(product)) {
-            products.computeIfPresent(product, (key, quantity) -> quantity+ 1);
+            products.computeIfPresent(product, (key, initQuantity) -> initQuantity + quantity);
         } else {
-            products.put(product, 1);
+            products.put(product, quantity);
         }
-        totalPrice = totalPrice.add(product.getPrice());
+        totalPrice = totalPrice.add(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
+    }
+
+    public void clean() {
+        products = new HashMap<>();
+        totalPrice = BigDecimal.ZERO;
     }
 
     private void initCart() {

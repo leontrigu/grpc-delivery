@@ -6,8 +6,12 @@ import com.perficient.orderapp.infrastructure.adapter.in.grpc.model.CartServiceG
 import com.perficient.orderapp.application.AddProductUseCase;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
+import org.springframework.security.access.annotation.Secured;
 
+@Slf4j
+@Secured({})
 @RequiredArgsConstructor
 @GRpcService
 public class AddProductsToCartServiceGrpc extends CartServiceImplBase {

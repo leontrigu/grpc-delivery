@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: mongodb
+grpc:
+  enableReflection: true
+  port: 6565
+apps:
+  product-app:
+    port: 6567
+    host: localhost
+  payment-app:
+    port: 6565
+    host: localhost
+    duration: 10000
+    credential: token
+    user: admin
